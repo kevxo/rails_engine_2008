@@ -377,8 +377,114 @@
           1,
           null
         ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/spec/models/invoice_item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/app/models/invoice_item.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/spec/models/invoice_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/app/models/invoice.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/spec/models/item_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/app/models/item.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/spec/models/merchant_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/app/models/merchant.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/spec/models/transaction_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/Users/kevincuadros/mod3/projects/rails_train/rails_engine/app/models/transaction.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
       }
     },
-    "timestamp": 1607812574
+    "timestamp": 1607814625
   }
 }
