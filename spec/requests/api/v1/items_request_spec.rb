@@ -36,7 +36,6 @@ describe 'Items API' do
     get "/api/v1/items/#{id}"
 
     json = JSON.parse(response.body, symbolize_names: true)
-    require 'pry' ; binding.pry
 
     expect(response).to be_successful
 
