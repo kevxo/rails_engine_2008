@@ -14,6 +14,10 @@ class Api::V1::ItemsController < ApplicationController
     render json: ItemSerializer.create_item(item)
   end
 
+  def update
+    render json: Item.update(params[:id], item_params)
+  end
+
   private
 
     def item_params
