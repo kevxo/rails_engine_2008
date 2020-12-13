@@ -1,5 +1,7 @@
+require 'faker'
+
 FactoryBot.define do
   factory :merchant do
-    name { "MyString" }
+    name { Faker::Name.name }
   end
 end
