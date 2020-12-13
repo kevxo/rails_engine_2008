@@ -10,15 +10,17 @@ describe 'Merchants API' do
 
     json = JSON.parse(response.body, symbolize_names: true)
 
-    expect(json.count).to eq(3)
-    expect(json.first).to have_key :data
-    expect(json.first[:data]).to be_a(Array)
-    expect(json.first[:data].first).to be_a(Hash)
+    expect(json[:data].count).to eq(3)
+    expect(json).to have_key :data
+    expect(json[:data]).to be_a(Array)
+    expect(json[:data].first).to be_a(Hash)
 
-    merchant = json.first[:data].first[:attributes]
+    merchants = json[:data]
 
-    expect(merchant).to have_key(:name)
-    expect(merchant[:name]).to be_a(String)
+    merchants.each do |merchant|
+      expect(merchant[:attributes]).to have_key(:name)
+      expect(merchant[:attributes][:name]).to be_a(String)
+    end
   end
 
   it 'can get one item by its id' do
@@ -37,5 +39,18 @@ describe 'Merchants API' do
 
     expect(merchant).to have_key :name
     expect(merchant[:name]).to be_a(String)
+  end
+
+  it 'can create a new merchant' do
+    merchant_params = {
+      name: 'Games for all'
+    }
+
+    headers = { 'CONTENT_TYPE' => 'application/json' }
+
+    post '/api/v1/merchants', headers: headers, params: JSON.generate(merchant: merchant_params)
+    created_merchant = Merchant.last
+    expect(response).to be_successful
+    expect(created_merchant.name).to eq(merchant_params[:name])
   end
 end
