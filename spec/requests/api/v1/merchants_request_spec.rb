@@ -20,4 +20,22 @@ describe 'Merchants API' do
     expect(merchant).to have_key(:name)
     expect(merchant[:name]).to be_a(String)
   end
+
+  it 'can get one item by its id' do
+    id = create(:merchant).id
+
+    get "/api/v1/merchants/#{id}"
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(response).to be_successful
+
+    expect(json).to have_key(:data)
+    expect(json[:data][:id]).to eq(id)
+
+    merchant = json[:data][:attributes]
+
+    expect(merchant).to have_key :name
+    expect(merchant[:name]).to be_a(String)
+  end
 end
