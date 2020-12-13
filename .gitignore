@@ -22,8 +22,10 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+coverage
 /coverage/
 /coverage.data
 coverage/.resultset.json
 coverage/index.html
+.DS_store
 
