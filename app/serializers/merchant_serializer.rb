@@ -29,16 +29,4 @@ class MerchantSerializer
       }
     }
   end
-
-  def self.create_merchant(merchant)
-    {
-      data: {
-        id: merchant.id,
-        type: 'merchant',
-        attributes: {
-          name: merchant.name
-        }
-      }
-    }
-  end
 end
