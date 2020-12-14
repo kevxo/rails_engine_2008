@@ -42,7 +42,7 @@ describe 'Items API' do
     expect(response).to be_successful
 
     expect(json).to have_key(:data)
-    expect(json[:data][:id]).to eq(id)
+    expect(json[:data][:id]).to eq(id.to_s)
 
     item = json[:data][:attributes]
 
@@ -119,7 +119,7 @@ describe 'relationships' do
     expect(response).to be_successful
 
     expect(json).to have_key(:data)
-    expect(json[:data][:id]).to eq(merchant.id)
+    expect(json[:data][:id]).to eq(merchant.id.to_s)
 
     merchant = json[:data][:attributes]
 

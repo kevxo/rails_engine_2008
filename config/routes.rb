@@ -3,12 +3,16 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :merchants do
-        get '/items', to: 'merchants#merchant_items'
+
+      resources :merchants
+      resources :items
+
+      namespace :merchants do
+        get '/:id/items', to: 'items#index'
       end
 
-      resources :items do
-        get '/merchants', to: 'items#item_merchant'
+      namespace :items do
+        get '/:id/merchants', to: 'merchants#index'
       end
     end
   end
