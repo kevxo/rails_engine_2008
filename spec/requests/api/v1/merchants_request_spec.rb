@@ -68,4 +68,13 @@ describe 'Merchants API' do
     expect(merchant.name).to_not eq(previous_name)
     expect(merchant.name).to eq('All Games')
   end
+
+  it 'can destroy an item' do
+    merchant = create(:merchant)
+
+    expect { delete "/api/v1/merchants/#{merchant.id}" }.to change(Merchant, :count).by(-1)
+
+    expect(response).to be_successful
+    expect { Merchant.find(merchant.id) }.to raise_error(ActiveRecord::RecordNotFound)
+  end
 end

@@ -68,7 +68,7 @@ describe 'Items API' do
       merchant_id: merchant
     }
 
-    headers = { 'CONTENT_TYPE' => 'application/json'}
+    headers = { 'CONTENT_TYPE' => 'application/json' }
 
     post '/api/v1/items', headers: headers, params: JSON.generate(item: item_params)
     created_item = Item.last
@@ -84,14 +84,23 @@ describe 'Items API' do
     id = create(:item).id
 
     previous_description = Item.last.description
-    item_params = { description: 'Console has a lot of great features'}
-    headers = {'CONTENT_TYPE' => 'application/json'}
+    item_params = { description: 'Console has a lot of great features' }
+    headers = { 'CONTENT_TYPE' => 'application/json' }
 
-    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate({item: item_params})
+    patch "/api/v1/items/#{id}", headers: headers, params: JSON.generate({ item: item_params })
     item = Item.find_by(id: id)
 
     expect(response).to be_successful
     expect(item.description).to_not eq(previous_description)
     expect(item.description).to eq('Console has a lot of great features')
+  end
+
+  it 'can destroy an item' do
+    item = create(:item)
+
+    expect { delete "/api/v1/items/#{item.id}" }.to change(Item, :count).by(-1)
+
+    expect(response).to be_successful
+    expect { Item.find(item.id) }.to raise_error(ActiveRecord::RecordNotFound)
   end
 end
