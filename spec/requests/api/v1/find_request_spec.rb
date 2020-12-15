@@ -29,6 +29,21 @@ describe 'Find Endpoints' do
       expect(item[:data][:attributes][:merchant_id]).to be_a(Integer)
     end
 
+    it 'displays error in items when searching unit_price' do
+      create(:item, unit_price: 52.20)
+
+      attribute = 'unit_price'
+      value = 20
+
+      get "/api/v1/items/find?#{attribute}=#{value}"
+
+      expect(response.code).to eq('400')
+
+      json = JSON.parse(response.body, symbolize_names: true)
+      expect(json).to have_key :error
+      expect(json[:error]).to eq('Invalid Syntax, Try another attribute')
+    end
+
     it 'display a merchant record' do
       create_merchant = create(:merchant)
       attribute = 'name'
@@ -45,6 +60,30 @@ describe 'Find Endpoints' do
 
       expect(merchant[:data][:attributes]).to have_key :name
       expect(merchant[:data][:attributes][:name]).to be_a(String)
+    end
+
+    it 'displays null when finding with a number/symbol value' do
+      create(:merchant)
+      attribute = 'name'
+      value = '2'
+
+      get "/api/v1/merchants/find?#{attribute}=#{value}"
+
+      merchant = JSON.parse(response.body, symbolize_names: true)
+
+      expect(merchant).to have_key :data
+      expect(merchant[:data]).to eq(nil)
+
+      create(:merchant)
+      attribute = 'name'
+      value = '!'
+
+      get "/api/v1/merchants/find?#{attribute}=#{value}"
+
+      merchant = JSON.parse(response.body, symbolize_names: true)
+
+      expect(merchant).to have_key :data
+      expect(merchant[:data]).to eq(nil)
     end
   end
 
@@ -110,7 +149,7 @@ describe 'Find Endpoints' do
       end
     end
 
-    it 'displays all items that match unit_price' do
+    it 'displays error in items when searching unit_price' do
       create(:item, unit_price: 20.00)
       create(:item, unit_price: 205.20)
       create(:item, unit_price: 52.20)
