@@ -31,7 +31,7 @@ describe 'Find Endpoints' do
 
     it 'display a merchant record' do
       create_merchant = create(:merchant)
-      attribute = 'merchant'
+      attribute = 'name'
       value = create_merchant.name
 
       get "/api/v1/merchants/find?#{attribute}=#{value}"

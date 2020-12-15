@@ -1,5 +1,6 @@
 class Api::V1::Items::SearchController < ApplicationController
   def show
-    render json: ItemSerializer.new(Item.where('name ILIKE ?', "%#{params[:name]}%").first)
+    attribute = params.keys.first
+    render json: ItemSerializer.new(Item.where("#{attribute} ILIKE ?", "%#{params[attribute]}%").first)
   end
 end
