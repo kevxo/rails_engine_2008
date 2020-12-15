@@ -16,7 +16,14 @@ module Api
 
         def show
           attribute = params.keys.first
-          render json: ItemSerializer.new(Item.where("#{attribute} ILIKE ?", "%#{params[attribute]}%").first)
+          if attribute == 'unit_price'
+            render json: {
+              error: 'Invalid Syntax, Try another attribute',
+              status: 400
+            }, status: 400
+          else
+            render json: ItemSerializer.new(Item.where("#{attribute} ILIKE ?", "%#{params[attribute]}%").first)
+          end
         end
       end
     end
