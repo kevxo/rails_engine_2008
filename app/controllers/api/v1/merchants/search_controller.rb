@@ -4,12 +4,12 @@ module Api
       class SearchController < ApplicationController
         def index
           attribute = params.keys.first
-          render json: MerchantSerializer.new(Merchant.where("#{attribute} ILIKE ?", "%#{params[attribute]}%"))
+          render json: MerchantSerializer.new(Merchant.find_all_merchants(attribute, params[attribute]))
         end
 
         def show
           attribute = params.keys.first
-          render json: MerchantSerializer.new(Merchant.where("#{attribute} ILIKE ?", "%#{params[attribute]}%").first)
+          render json: MerchantSerializer.new(Merchant.find_merchant(attribute, params[attribute]))
         end
       end
     end
