@@ -83,5 +83,33 @@ RSpec.describe Merchant, type: :model do
 
       expect(Merchant.most_items_sold(quantity)).to eq([merchant1, merchant2])
     end
+    it 'revenue_date_range' do
+      merchant1 = create(:merchant)
+      merchant2 = create(:merchant)
+      customer = create(:customer)
+
+      item1 = create(:item, merchant_id: merchant1.id, unit_price: 20.00)
+      item2 = create(:item, merchant_id: merchant1.id, unit_price: 40.00)
+      item3 = create(:item, merchant_id: merchant2.id, unit_price: 15.00)
+
+      invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant1.id, created_at: '2020-12-09', status: 'shipped')
+      invoice2 = create(:invoice, customer_id: customer.id, merchant_id: merchant1.id, created_at: '2020-12-09', status: 'shipped')
+      invoice3 = create(:invoice, customer_id: customer.id, merchant_id: merchant2.id, created_at: '2020-12-09', status: 'shipped')
+
+      create(:transaction, invoice_id: invoice1.id, result: 'success')
+      create(:transaction, invoice_id: invoice2.id, result: 'success')
+      create(:transaction, invoice_id: invoice3.id, result: 'success')
+
+      create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 20)
+      create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id, quantity: 50)
+      create(:invoice_item, item_id: item3.id, invoice_id: invoice3.id, quantity: 10)
+
+      start_date = '2020-12-01'
+      end_date = '2020-12-16'
+
+      expected = 120.00
+
+      expect(Merchant.revenue_date_range(start_date, end_date)).to eq(expected)
+    end
   end
 end

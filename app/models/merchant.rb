@@ -29,4 +29,13 @@ class Merchant < ApplicationRecord
     .order('sold DESC')
     .limit(limit)
   end
+
+  def self.revenue_date_range(start_date, end_date)
+    joins(invoices: [:invoice_items, :transactions])
+    .where(
+      transactions: {result: 'success'},
+      invoices: {created_at: (start_date)..("#{end_date} 23:59:59"), status: 'shipped'}
+    )
+    .sum('invoice_items.quantity * invoice_items.unit_price')
+  end
 end
