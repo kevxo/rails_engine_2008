@@ -7,21 +7,21 @@ describe 'Buisness Intelligence' do
       @merchant2 = create(:merchant)
       @customer = create(:customer)
 
-      @item1 = create(:item, merchant_id: @merchant1.id)
-      @item2 = create(:item, merchant_id: @merchant1.id)
-      @item3 = create(:item, merchant_id: @merchant2.id)
+      @item1 = create(:item, merchant_id: @merchant1.id, unit_price: 20.00)
+      @item2 = create(:item, merchant_id: @merchant1.id, unit_price: 40.00)
+      @item3 = create(:item, merchant_id: @merchant2.id, unit_price: 15.00)
 
-      @invoice1 = create(:invoice, customer_id: @customer.id, merchant_id: @merchant1.id)
-      @invoice2 = create(:invoice, customer_id: @customer.id, merchant_id: @merchant1.id)
-      @invoice3 = create(:invoice, customer_id: @customer.id, merchant_id: @merchant2.id)
+      @invoice1 = create(:invoice, customer_id: @customer.id, merchant_id: @merchant1.id, created_at: '2012-03-24', status: 'shipped')
+      @invoice2 = create(:invoice, customer_id: @customer.id, merchant_id: @merchant1.id, created_at: '2012-03-24', status: 'shipped')
+      @invoice3 = create(:invoice, customer_id: @customer.id, merchant_id: @merchant2.id, created_at: '2012-03-24', status: 'shipped')
 
       create(:transaction, invoice_id: @invoice1.id, result: 'success')
       create(:transaction, invoice_id: @invoice2.id, result: 'success')
       create(:transaction, invoice_id: @invoice3.id, result: 'success')
 
-      create(:invoice_item, item_id: @item1.id, invoice_id: @invoice1.id)
-      create(:invoice_item, item_id: @item2.id, invoice_id: @invoice2.id)
-      create(:invoice_item, item_id: @item3.id, invoice_id: @invoice3.id)
+      create(:invoice_item, item_id: @item1.id, invoice_id: @invoice1.id, quantity: 20)
+      create(:invoice_item, item_id: @item2.id, invoice_id: @invoice2.id, quantity: 50)
+      create(:invoice_item, item_id: @item3.id, invoice_id: @invoice3.id, quantity: 10)
 
       @quantity = 2
     end
@@ -50,6 +50,19 @@ describe 'Buisness Intelligence' do
       expect(json[:data].count).to eq(2)
       expect(json[:data].first[:attributes][:name]).to eq(@merchant1.name)
       expect(json[:data].first[:attributes][:name]).to_not eq(@merchant2.name)
+    end
+
+    it 'should return total revenue across all merchants, given date range' do
+
+      get "/api/v1/revenue?start=2012-03-09&end=2012-03-24"
+
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+
+      expect(json).to have_key :data
+      expect(json[:data][:id]).to eq(nil)
+      expect(json[:data][:attributes][:revenue]).to be_a(Float)
     end
   end
 end
