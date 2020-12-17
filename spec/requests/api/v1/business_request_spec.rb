@@ -53,7 +53,6 @@ describe 'Buisness Intelligence' do
     end
 
     it 'should return total revenue across all merchants, given date range' do
-
       get '/api/v1/revenue?start=2012-03-09&end=2012-03-24'
 
       json = JSON.parse(response.body, symbolize_names: true)
@@ -66,7 +65,6 @@ describe 'Buisness Intelligence' do
     end
 
     it 'should return revenue for a merchant' do
-
       get "/api/v1/merchants/#{@merchant1.id}/revenue"
 
       json = JSON.parse(response.body, symbolize_names: true)
