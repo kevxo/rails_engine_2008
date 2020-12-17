@@ -7,6 +7,9 @@ Rails.application.routes.draw do
         get '/:id/items', to: 'items#index'
         get '/find_all', to: 'search#index'
         get '/find', to: 'search#show'
+        get '/most_revenue', to: 'intelligence#most_revenue'
+        get '/most_items', to: 'intelligence#most_items_sold'
+        get '/:id/revenue', to: 'intelligence#revenue'
       end
 
       namespace :items do
@@ -16,6 +19,8 @@ Rails.application.routes.draw do
       end
 
       resources :merchants
+      get '/revenue', to: 'merchants#revenue_across_date'
+
       resources :items
     end
   end

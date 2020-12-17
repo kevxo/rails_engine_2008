@@ -18,13 +18,17 @@ module Api
       end
 
       def destroy
-        render json: Merchant.destroy(params[:id])
+        Merchant.destroy(params[:id])
+      end
+
+      def revenue_across_date
+        render json: RevenueSerializer.revenue(Merchant.revenue_date_range(params[:start], params[:end]))
       end
 
       private
 
       def merchant_params
-        params.require(:merchant).permit(:name)
+        params.permit(:name)
       end
     end
   end

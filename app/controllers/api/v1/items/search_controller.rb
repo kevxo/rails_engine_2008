@@ -10,7 +10,7 @@ module Api
               status: 400
             }, status: 400
           else
-            render json: ItemSerializer.new(Item.where("#{attribute} ILIKE ?", "%#{params[attribute]}%"))
+            render json: ItemSerializer.new(Item.find_all_items(attribute, params[attribute]))
           end
         end
 
@@ -22,7 +22,7 @@ module Api
               status: 400
             }, status: 400
           else
-            render json: ItemSerializer.new(Item.where("#{attribute} ILIKE ?", "%#{params[attribute]}%").first)
+            render json: ItemSerializer.new(Item.find_item(attribute, params[attribute]))
           end
         end
       end
