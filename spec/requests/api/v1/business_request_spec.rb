@@ -54,7 +54,20 @@ describe 'Buisness Intelligence' do
 
     it 'should return total revenue across all merchants, given date range' do
 
-      get "/api/v1/revenue?start=2012-03-09&end=2012-03-24"
+      get '/api/v1/revenue?start=2012-03-09&end=2012-03-24'
+
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(response).to be_successful
+
+      expect(json).to have_key :data
+      expect(json[:data][:id]).to eq(nil)
+      expect(json[:data][:attributes][:revenue]).to be_a(Float)
+    end
+
+    it 'should return revenue for a merchant' do
+
+      get "/api/v1/merchants/#{@merchant1.id}/revenue"
 
       json = JSON.parse(response.body, symbolize_names: true)
 

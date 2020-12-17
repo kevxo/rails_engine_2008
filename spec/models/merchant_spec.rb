@@ -111,5 +111,26 @@ RSpec.describe Merchant, type: :model do
 
       expect(Merchant.revenue_date_range(start_date, end_date)).to eq(expected)
     end
+
+    it 'revenue for one merchant' do
+      merchant1 = create(:merchant)
+      customer = create(:customer)
+
+      item1 = create(:item, merchant_id: merchant1.id, unit_price: 20.00)
+      item2 = create(:item, merchant_id: merchant1.id, unit_price: 40.00)
+
+      invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant1.id, created_at: '2020-12-09', status: 'shipped')
+      invoice2 = create(:invoice, customer_id: customer.id, merchant_id: merchant1.id, created_at: '2020-12-09', status: 'shipped')
+
+      create(:transaction, invoice_id: invoice1.id, result: 'success')
+      create(:transaction, invoice_id: invoice2.id, result: 'success')
+
+      create(:invoice_item, item_id: item1.id, invoice_id: invoice1.id, quantity: 20)
+      create(:invoice_item, item_id: item2.id, invoice_id: invoice2.id, quantity: 50)
+
+      expected = 105.00
+
+      expect(Merchant.revenue(merchant1.id)).to eq(expected)
+    end
   end
 end
