@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         get '/find_all', to: 'search#index'
         get '/find', to: 'search#show'
         get '/most_revenue', to: 'intelligence#most_revenue'
-        get '/most_items', to: 'intelligence#most_items'
+        get '/most_items', to: 'intelligence#most_items_sold'
       end
 
       namespace :items do

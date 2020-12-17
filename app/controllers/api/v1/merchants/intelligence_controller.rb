@@ -6,7 +6,7 @@ module Api
           render json: MerchantSerializer.new(Merchant.most_revenue(params[:quantity]))
         end
 
-        def most_items
+        def most_items_sold
           render json: MerchantSerializer.new(Merchant.most_items_sold(params[:quantity]))
         end
       end
