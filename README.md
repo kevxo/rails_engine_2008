@@ -49,7 +49,8 @@
 
 ## Schema
 
-  ![Schema](<iframe width="560" height="315" src='https://dbdiagram.io/embed/5fdf93309a6c525a03bbc2a4'> </iframe>)
+  ![railsengine](https://user-images.githubusercontent.com/63522369/102722599-19e4fc00-42d0-11eb-868a-60653a3156c5.png)
+
   
 ## Test Coverage
 
