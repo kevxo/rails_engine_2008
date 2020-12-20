@@ -3,9 +3,9 @@
 ## Project Description
   You are working for a company developing an E-Commerce Application. Your team is working in a service-oriented architecture, meaning the front and back ends of this application are separate and communicate via APIs. Your job is to expose the data that powers the site through an API that the front end will consume.
 
-### Learning Goals
-## Explicit
-## Below are technical goals that have be applied in this project.
+## Learning Goals
+  Explicit
+  Below are technical goals that have be applied in this project.
   * The priority of these goals are demonstrated using a star grading system.
   * By the end of this project:
   * Student should have a functional understanding of the concept ⭐ ⭐ ⭐
@@ -38,6 +38,7 @@
    Finders 
    - GET /api/v1/resource/find?attribute=value
    - GET /api/v1/resource/find_all?attribute=value
+   
    Business Intelligence
    - GET /api/v1/merchants/most_revenue?quantity=x
    - GET /api/v1/merchants/most_items?quantity=x
@@ -48,8 +49,8 @@
 
 ## Schema
 
-![Alt](file:///Users/kevincuadros/Downloads/Untitled.pdf)
-
+  ![Schema](<iframe width="560" height="315" src='https://dbdiagram.io/embed/5fdf93309a6c525a03bbc2a4'> </iframe>)
+  
 ## Test Coverage
 
   - 100% 647/647 lines
